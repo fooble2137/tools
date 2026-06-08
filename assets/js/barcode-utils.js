@@ -7,11 +7,11 @@ export const BARCODE_TYPES = [
     },
     {
         id: "ean13",
-        label: "EAN-13 (12-13 digits)",
+        label: "EAN-13 (12 digits)",
         bcid: "ean13",
         example: "5901234123457",
         numeric: true,
-        lengths: [12, 13],
+        lengths: [12],
     },
     {
         id: "upca",
