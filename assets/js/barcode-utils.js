@@ -74,13 +74,13 @@ export function validateBarcodeText(type, rawText) {
     return {valid: true, normalized, message: "Barcode updated!"};
 }
 
-export function buildBarcodeUrl({type, text, scale, height, includeText}) {
+export function buildBarcodeUrl({type, text, scale, height, includeText, textAlignment}) {
     const params = new URLSearchParams({
         bcid: type.bcid,
         text,
         scale: String(scale),
         height: String(height),
-        textxalign: "center",
+        textxalign: textAlignment,
     });
 
     if (includeText) {

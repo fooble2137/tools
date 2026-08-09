@@ -6,6 +6,7 @@ const scaleInput = document.getElementById("barcode-scale");
 const heightInput = document.getElementById("barcode-height");
 const scaleLabel = document.querySelector('label[for="barcode-scale"]');
 const heightLabel = document.querySelector('label[for="barcode-height"]');
+const alignmentSelect = document.getElementById("text-alignment");
 const includeTextCheckbox = document.getElementById("include-text");
 const barcodeImg = document.getElementById("barcode-image");
 const statusEl = document.getElementById("status");
@@ -27,6 +28,10 @@ function updateScaleLabel() {
 
 function updateHeightLabel() {
     heightLabel.textContent = `Height: ${heightInput.value}px`;
+}
+
+function updateTextAlignmentSelector() {
+    alignmentSelect.disabled = !includeTextCheckbox.checked;
 }
 
 function getSelectedType() {
@@ -60,6 +65,7 @@ function updateBarcode() {
         scale: Number(scaleInput.value),
         height: Number(heightInput.value),
         includeText: includeTextCheckbox.checked,
+        textAlignment: alignmentSelect.value,
     });
 
     barcodeImg.src = url;
@@ -70,6 +76,7 @@ function updateBarcode() {
         url,
         text: normalized,
         type: type.id,
+        textAlignment: alignmentSelect.value,
     };
 
     setStatus(validation.message, "success");
@@ -152,10 +159,11 @@ typeSelect.addEventListener("change", () => {
     updateBarcode();
 });
 
-[scaleInput, heightInput, includeTextCheckbox].forEach((input) => {
+[scaleInput, heightInput, includeTextCheckbox, alignmentSelect].forEach((input) => {
     input.addEventListener("input", () => {
         updateScaleLabel();
         updateHeightLabel();
+        updateTextAlignmentSelector();
         updateBarcode();
     });
 });
